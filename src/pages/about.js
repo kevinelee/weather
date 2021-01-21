@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import dogIllustration from "../images/dog-illustration.svg";
+
 
 function AboutPage() {
+
+  const [itemInput, setItemInput] = useState('');
+  const [list, setList] = useState([]);
+
+  function getList() {
+    return fetch('http://localhost:3333/list')
+      .then(data => data.json())
+  }
+
+  useEffect(() => {
+    let mounted = true;
+    getList()
+      .then(items => {
+        if (mounted) {
+          setList(items)
+        }
+      })
+    return () => mounted = false;
+  }, [])
+
+
   return (
     <Layout>
       <SEO
@@ -13,23 +34,19 @@ function AboutPage() {
       />
 
       <section className="flex flex-col items-center md:flex-row">
-        <div className="md:w-2/3 md:mr-8">
-          <blockquote className="pl-4 font-serif leading-loose text-justify border-l-4 border-gray-900">
-            The point is... to live one&apos;s life in the full complexity of
-            what one is, which is something much darker, more contradictory,
-            more of a maelstrom of impulses and passions, of cruelty, ecstacy,
-            and madness, than is apparent to the civilized being who glides on
-            the surface and fits smoothly into the world.
-          </blockquote>
-
-          <cite className="block mt-4 text-xs font-bold text-right uppercase">
-            – Thomas Nagel
-          </cite>
+        <div className="wrapper">
+          <h1>My Grocery List</h1>
+          <ul>
+            {list.map(item => <li key={item.item}>{item.item}</li>)}
+          </ul>
+          <form>
+            <label>
+              <p>New Item</p>
+              <input type="text" onChange={event => setItemInput(event.target.value)} value={itemInput} />
+            </label>
+            <button type="submit">Submit</button>
+          </form>
         </div>
-
-        <figure className="w-2/3 md:w-1/3">
-          <img alt="A dog relaxing" src={dogIllustration} />
-        </figure>
       </section>
     </Layout>
   );

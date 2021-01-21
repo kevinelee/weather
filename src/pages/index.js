@@ -1,10 +1,49 @@
-import React from "react";
+/* eslint react/prop-types: 0 */
 
+import React, { useState } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import catAndHumanIllustration from "../images/cat-and-human-illustration.svg";
+
+function ListItem({ name, variable }) {
+  return (
+    <li><span className="font-bold text-blue-300 ">{name}:</span> {variable}</li>
+  )
+}
+
+
 
 function IndexPage() {
+  const [items, setItems] = useState({ clouds: "", name: "", main: { humidity: "", temp: "", temp_max: "", temp_min: "" } });
+  const [city, setCity] = useState("");
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setCity(city);
+    console.log(city);
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=043a310b4251d24aae44b03d572cdbb1`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+
+          if (result.cod !== "404") {
+            console.log("results", result);
+            setItems(result);
+          } else {
+            setError(true);
+          }
+
+        },
+        (error) => {
+          console.error(error)
+        }
+      )
+  }
+
+  const { clouds, name, main } = items;
+  const { humidity, temp, temp_max, temp_min } = main;
+
   return (
     <Layout>
       <SEO
@@ -13,31 +52,36 @@ function IndexPage() {
       />
 
       <section className="text-center">
-        <img
-          alt="Cat and human sitting on a couch"
-          className="block w-1/2 mx-auto mb-8"
-          src={catAndHumanIllustration}
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            className={error ? "border-2 border-red-500 outline-none" : "outline-none"}
+            type="text"
+            placeholder="Search for City"
+            value={city}
+            name="cityname"
+            onChange={e => {
+              setCity(e.target.value)
+            }}
+            onClick={() => setError(false)}
+          />
+        </form>
+        <ul>
+          <p className="font-bold p-4">Scientifically speaking</p>
 
-        <h2 className="inline-block p-3 mb-4 text-2xl font-bold bg-yellow-400">
-          Hey there! Welcome to your first Gatsby site.
-        </h2>
 
-        <p className="leading-loose">
-          This is a barebones starter for Gatsby styled using{` `}
-          <a
-            className="font-bold text-gray-900 no-underline"
-            href="https://tailwindcss.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Tailwind CSS
-          </a>
-          , a utility-first CSS framework.
-        </p>
+          <ListItem name="Name" variable={name} />
+          <ListItem name="Temperature" variable={temp} />
+          <ListItem name="Maximum" variable={temp_max} />
+          <ListItem name="Minimum" variable={temp_min} />
+          <ListItem name="Humidity" variable={humidity} />
+          <ListItem name="Clouds" variable={clouds && clouds.all} />
+
+        </ul>
       </section>
     </Layout>
   );
 }
+
+
 
 export default IndexPage;
