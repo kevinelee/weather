@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
-export default function MapContainer({latitude = 34.0522, longitude =-118.2437}) {
+export default function MapContainer({lat, lon}) {
     const mapStyles = {
         height: "50vh",
     };
 
     const defaultCenter = {
-        lat: {latitude},
-        lng: {longitude},
+        // lat: 34.0522,
+        // lng: -118.2437,
+        lat: lat,
+        lng: lon,
     };
 
     return (
@@ -17,10 +19,10 @@ export default function MapContainer({latitude = 34.0522, longitude =-118.2437})
             <LoadScript googleMapsApiKey={process.env.GATSBY_GOOGLE_MAP_API_KEY}>
                 <GoogleMap
                     mapContainerStyle={mapStyles}
-                    zoom={13}
+                    zoom={12}
                     center={defaultCenter}
                 >
-
+                <Marker position={defaultCenter}/>
                 </GoogleMap>
             </LoadScript>
         </div>

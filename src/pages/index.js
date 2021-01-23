@@ -40,7 +40,8 @@ function IndexPage() {
       )
   }
 
-  const { clouds, name, main } = items;
+  const { clouds, name, main, coord } = items;
+  
   const { humidity, temp, temp_max, temp_min } = main;
 
   return (
@@ -75,12 +76,13 @@ function IndexPage() {
           <ListItem name="Humidity" variable={humidity} />
           <ListItem name="Clouds" variable={clouds && clouds.all} />
         </ul>
-        <ReactMap latitude={} longitude={}/>
+        {coord ? <ReactMap lat={coord.lat} lon={coord.lon} /> : null}
       </section>
     </Layout>
   );
 }
 
+// latitude={} longitude={}
 
 
 export default IndexPage;
