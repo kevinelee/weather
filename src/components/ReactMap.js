@@ -9,8 +9,6 @@ export default function MapContainer({lat, lon}) {
     };
 
     const defaultCenter = {
-        // lat: 34.0522,
-        // lng: -118.2437,
         lat: lat,
         lng: lon,
     };
