@@ -10,7 +10,11 @@ function ListItem({ name, variable }) {
   )
 }
 
+<<<<<<< HEAD
 console.log(process.env.GATSBY_WEATHER_API_KEY)
+=======
+
+>>>>>>> aed1f3b13816f5db90b601e183a98e77991b63d7
 
 function IndexPage() {
   const [items, setItems] = useState({ clouds: "", name: "", main: { humidity: "", temp: "", temp_max: "", temp_min: "" } });
@@ -22,7 +26,11 @@ function IndexPage() {
     setCity(city);
     console.log(city);
 
+<<<<<<< HEAD
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.GATSBY_WEATHER_API_KEY}`)
+=======
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=043a310b4251d24aae44b03d572cdbb1`)
+>>>>>>> aed1f3b13816f5db90b601e183a98e77991b63d7
       .then(res => res.json())
       .then(
         (result) => {
