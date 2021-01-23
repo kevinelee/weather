@@ -5,7 +5,7 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 export default function MapContainer({lat, lon}) {
     const mapStyles = {
         height: "50vh",
-        opacity: "0.5"
+        
     };
 
     const defaultCenter = {
