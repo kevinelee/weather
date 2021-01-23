@@ -3,16 +3,40 @@
 import React, { useState } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import ReactMap from "../components/ReactMap"
+import ReactMap from "../components/ReactMap";
 
 function ListItem({ name, variable }) {
   return (
-    <li><span className="font-bold text-blue-300 ">{name}:</span> {variable}</li>
-  )
+    <li>
+      <span className="font-bold text-blue-300 ">{name}:</span> {variable}
+    </li>
+  );
+}
+
+function TemperatureListItem({name, kelvin}){
+
+  function toCelsius(kelvin){
+    return `${(kelvin - 273.15).toFixed(2)}°C`;
+  }
+
+  function toFahrenheit(kelvin){
+    return `${((kelvin - 273.15) * 1.8 + 32).toFixed(2)}°F`;
+  }
+
+  return (
+    <li>
+      <span className="font-bold text-blue-300 ">{name}:</span>{" "}
+      {`${toCelsius(kelvin)} / ${toFahrenheit(kelvin)}`}
+    </li>
+  );
 }
 
 function IndexPage() {
-  const [items, setItems] = useState({ clouds: "", name: "", main: { humidity: "", temp: "", temp_max: "", temp_min: "" } });
+  const [items, setItems] = useState({
+    clouds: "",
+    name: "",
+    main: { humidity: "", temp: "", temp_max: "", temp_min: "" },
+  });
   const [city, setCity] = useState("");
   const [error, setError] = useState(false);
 
@@ -21,27 +45,27 @@ function IndexPage() {
     setCity(city);
     console.log(city);
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.GATSBY_WEATHER_API_KEY}`)
-      .then(res => res.json())
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.GATSBY_WEATHER_API_KEY}`
+    )
+      .then((res) => res.json())
       .then(
         (result) => {
-
           if (result.cod !== "404") {
             console.log("results", result);
             setItems(result);
           } else {
             setError(true);
           }
-
         },
         (error) => {
-          console.error(error)
+          console.error(error);
         }
-      )
-  }
+      );
+  };
 
   const { clouds, name, main, coord } = items;
-  
+
   const { humidity, temp, temp_max, temp_min } = main;
 
   return (
@@ -54,13 +78,15 @@ function IndexPage() {
       <section className="text-center">
         <form onSubmit={handleSubmit}>
           <input
-            className={error ? "border-2 border-red-500 outline-none" : "outline-none"}
+            className={
+              error ? "border-2 border-red-500 outline-none" : "outline-none"
+            }
             type="text"
             placeholder="Search for City"
             value={city}
             name="cityname"
-            onChange={e => {
-              setCity(e.target.value)
+            onChange={(e) => {
+              setCity(e.target.value);
             }}
             onClick={() => setError(false)}
           />
@@ -68,9 +94,8 @@ function IndexPage() {
         <ul>
           <p className="font-bold p-4">Scientifically speaking</p>
 
-
           <ListItem name="Name" variable={name} />
-          <ListItem name="Temperature" variable={temp} />
+          <TemperatureListItem name="Temperature" />
           <ListItem name="Maximum" variable={temp_max} />
           <ListItem name="Minimum" variable={temp_min} />
           <ListItem name="Humidity" variable={humidity} />
@@ -83,6 +108,5 @@ function IndexPage() {
 }
 
 // latitude={} longitude={}
-
 
 export default IndexPage;
