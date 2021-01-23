@@ -18,18 +18,27 @@ function Layout({ children }) {
             Created by{` `}
             <a
               className="font-bold no-underline"
-              href="https://bryant.io"
+              href="https://www.github.com/jasonpark723"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Taylor Bryant
+              Jason Park&nbsp;
+            </a>
+            and
+            <a
+              className="font-bold no-underline"
+              href="https://www.github.com/kevinelee"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              &nbsp;Kevin Lee
             </a>
           </p>
 
           <p>
             <a
               className="font-bold text-white no-underline"
-              href="https://github.com/taylorbryant/gatsby-starter-tailwind"
+              href="https://github.com/kevinelee/weather"
               target="_blank"
               rel="noopener noreferrer"
             >
