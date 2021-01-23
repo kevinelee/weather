@@ -3,18 +3,13 @@
 import React, { useState } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import ReactMap from "../components/ReactMap"
 
 function ListItem({ name, variable }) {
   return (
     <li><span className="font-bold text-blue-300 ">{name}:</span> {variable}</li>
   )
 }
-
-<<<<<<< HEAD
-console.log(process.env.GATSBY_WEATHER_API_KEY)
-=======
-
->>>>>>> aed1f3b13816f5db90b601e183a98e77991b63d7
 
 function IndexPage() {
   const [items, setItems] = useState({ clouds: "", name: "", main: { humidity: "", temp: "", temp_max: "", temp_min: "" } });
@@ -26,11 +21,7 @@ function IndexPage() {
     setCity(city);
     console.log(city);
 
-<<<<<<< HEAD
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.GATSBY_WEATHER_API_KEY}`)
-=======
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=043a310b4251d24aae44b03d572cdbb1`)
->>>>>>> aed1f3b13816f5db90b601e183a98e77991b63d7
       .then(res => res.json())
       .then(
         (result) => {
@@ -49,7 +40,8 @@ function IndexPage() {
       )
   }
 
-  const { clouds, name, main } = items;
+  const { clouds, name, main, coord } = items;
+  
   const { humidity, temp, temp_max, temp_min } = main;
 
   return (
@@ -83,13 +75,14 @@ function IndexPage() {
           <ListItem name="Minimum" variable={temp_min} />
           <ListItem name="Humidity" variable={humidity} />
           <ListItem name="Clouds" variable={clouds && clouds.all} />
-
         </ul>
+        {coord ? <ReactMap lat={coord.lat} lon={coord.lon} /> : null}
       </section>
     </Layout>
   );
 }
 
+// latitude={} longitude={}
 
 
 export default IndexPage;
