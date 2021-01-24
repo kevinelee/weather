@@ -35,28 +35,7 @@ function TemperatureListItem({ name, kelvin }) {
 }
 
 function IndexPage() {
-  var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  };
 
-  function success(pos) {
-    var crd = pos.coords;
-
-    console.log("Your current position is:");
-    console.log(`Latitude : ${crd.latitude}`);
-    console.log(`Longitude: ${crd.longitude}`);
-    console.log(`More or less ${crd.accuracy} meters.`);
-  }
-
-  function error2(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
-
-  const geo = navigator.geolocation.getCurrentPosition(success, error2, options);
-
-  console.log(geo)
 
   const [items, setItems] = useState({
     clouds: "",
