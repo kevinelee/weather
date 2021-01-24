@@ -22,8 +22,15 @@ function TemperatureListItem({ name, kelvin }) {
     return `${((kelvin - 273.15) * 1.8 + 32).toFixed(2)}°F`;
   }
 
-  return (
-    { kelvin ? (<li><span className="font-bold text-blue-300">{name}:</span>{`${toCelsius(kelvin)} / ${toFahrenheit(kelvin)}`}</li>) : null}
+  return kelvin ? (
+    <li>
+      <span className="font-bold text-blue-300">{name}:</span>
+      {`${toCelsius(kelvin)} / ${toFahrenheit(kelvin)}`}
+    </li>
+  ) : (
+    <li>
+      <span className="font-bold text-blue-300">{name}:</span>
+    </li>
   );
 }
 
@@ -89,13 +96,8 @@ function IndexPage() {
         </form>
         <ul>
           <p className="font-bold p-4">Scientifically speaking</p>
-
           <ListItem name="Name" variable={name} />
-          {temp ? (
-            <TemperatureListItem name="Temperature" kelvin={temp} />
-          ) : (
-            <ListItem name="Temperature" variable={temp}/>
-          )}
+          <TemperatureListItem name="Temperature" kelvin={temp} />
           <ListItem name="Maximum" variable={temp_max} />
           <ListItem name="Minimum" variable={temp_min} />
           <ListItem name="Humidity" variable={humidity} />
