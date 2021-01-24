@@ -55,7 +55,8 @@ function IndexPage() {
   }
 
   const geo = navigator.geolocation.getCurrentPosition(success, error2, options);
-  console.log(geo);
+
+  console.log(geo)
 
   const [items, setItems] = useState({
     clouds: "",
