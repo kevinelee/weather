@@ -5,11 +5,15 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import ReactMap from "../components/ReactMap";
 import Background from "../components/Background";
+// import Cloudy from "../images/cloudy skies.jpg";
+// import Snow from "../images/snow sky.jpg";
+import Clear from "../images/clear skies.jpg";
 
 function ListItem({ name, variable, symbol, addClass }) {
   return (
     <li className={`p-1 ${addClass}`}>
-      <span className="font-bold text-blue-300 ">{name}:</span> {variable}{symbol}
+      <span className="font-bold text-blue-300 ">{name}:</span> {variable}
+      {symbol}
     </li>
   );
 }
@@ -36,14 +40,13 @@ function TemperatureListItem({ name, kelvin }) {
 }
 
 function IndexPage() {
-
-
   const [items, setItems] = useState({
     clouds: "",
     name: "",
     main: { humidity: "", temp: "", temp_max: "", temp_min: "" },
   });
   const [city, setCity] = useState("");
+  // const [weather, setWeather] = useState("");
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
@@ -70,8 +73,9 @@ function IndexPage() {
   };
 
   const { clouds, name, main, coord, weather } = items;
-
   const { humidity, temp, temp_max, temp_min } = main;
+
+  //clouds, clear, mist, snow, rain, drizzle, thunderstorm
 
   return (
     <Layout>
@@ -81,7 +85,7 @@ function IndexPage() {
       />
 
       <section className="text-center py-16">
-        <Background />
+        <Background weather={Clear} />
         <div className="">
           <form onSubmit={handleSubmit}>
             <input
@@ -127,3 +131,11 @@ function IndexPage() {
 }
 
 export default IndexPage;
+
+// {
+//   switch (weather[0].main) {
+//     case "clouds":
+//       return Cloudy;
+//       break;
+//   }
+// }

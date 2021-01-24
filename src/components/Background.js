@@ -1,15 +1,14 @@
 import React from "react";
 import CloudySkies from "../images/cloudy skies.jpg";
-// import CloudySkies2 from "./cloudy";
 
-export default function Background() {
+export default function Background({weather = CloudySkies}) {
   return (
-    <div>
+    <>
       <img
-        style={{ zIndex: -1, top: "60px" }}
-        className="top-0 absolute w-screen object-cover"
-        src={CloudySkies}
+        style={{ zIndex: -1, top: "60px", opacity : "50%" }}
+        className="top-0 absolute w-screen object-cover bg-opacity-50"
+        src={weather}
       />
-    </div>
+    </>
   );
 }
