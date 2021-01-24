@@ -5,9 +5,9 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import ReactMap from "../components/ReactMap";
 
-function ListItem({ name, variable }) {
+function ListItem({ name, variable, addClass }) {
   return (
-    <li>
+    <li className={`p-1 ${addClass}`}>
       <span className="font-bold text-blue-300 ">{name}:</span> {variable}
     </li>
   );
@@ -25,7 +25,7 @@ function TemperatureListItem({ name, kelvin }) {
   return kelvin ? (
     <li>
       <span className="font-bold text-blue-300">{name}:</span>
-      {`${toCelsius(kelvin)} / ${toFahrenheit(kelvin)}`}
+      {` ${toCelsius(kelvin)} / ${toFahrenheit(kelvin)}`}
     </li>
   ) : (
     <li>
@@ -46,7 +46,6 @@ function IndexPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setCity(city);
-    console.log(city);
 
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.GATSBY_WEATHER_API_KEY}`
@@ -55,7 +54,7 @@ function IndexPage() {
       .then(
         (result) => {
           if (result.cod !== "404") {
-            console.log("results", result);
+            console.log("City: ", result);
             setItems(result);
           } else {
             setError(true);
@@ -67,7 +66,7 @@ function IndexPage() {
       );
   };
 
-  const { clouds, name, main, coord } = items;
+  const { clouds, name, main, coord, weather } = items;
 
   const { humidity, temp, temp_max, temp_min } = main;
 
@@ -79,31 +78,39 @@ function IndexPage() {
       />
 
       <section className="text-center">
-        <form onSubmit={handleSubmit}>
-          <input
-            className={
-              error ? "border-2 border-red-500 outline-none" : "outline-none"
-            }
-            type="text"
-            placeholder="Search for City"
-            value={city}
-            name="cityname"
-            onChange={(e) => {
-              setCity(e.target.value);
-            }}
-            onClick={() => setError(false)}
-          />
-        </form>
-        <ul>
-          <p className="font-bold p-4">Scientifically speaking</p>
-          <ListItem name="Name" variable={name} />
-          <TemperatureListItem name="Temperature" kelvin={temp} />
-          <ListItem name="Maximum" variable={temp_max} />
-          <ListItem name="Minimum" variable={temp_min} />
-          <ListItem name="Humidity" variable={humidity} />
-          <ListItem name="Clouds" variable={clouds && clouds.all} />
-        </ul>
-        {coord ? <ReactMap lat={coord.lat} lon={coord.lon} /> : null}
+        <div className="">
+          <form onSubmit={handleSubmit}>
+            <input
+              className={
+                error ? "border-2 border-red-500 outline-none" : "outline-none"
+              }
+              type="text"
+              placeholder="Search for City"
+              value={city}
+              name="cityname"
+              onChange={(e) => {
+                setCity(e.target.value);
+              }}
+              onClick={() => setError(false)}
+            />
+            <ul>
+              <ListItem name="Name" variable={name} />
+              <TemperatureListItem name="Temperature" kelvin={temp} />
+              <TemperatureListItem name="Temp Max" kelvin={temp_max} />
+              <TemperatureListItem name="Temp Min" kelvin={temp_min} />
+              <ListItem name="Humidity" variable={humidity} />
+              <ListItem name="Clouds" variable={clouds && clouds.all} />
+              <ListItem
+                name="Weather"
+                variable={weather && weather[0].description}
+                addClass={"capitalize"}
+              />
+            </ul>
+          </form>
+          <div className="">
+            {coord ? <ReactMap lat={coord.lat} lon={coord.lon} /> : null}
+          </div>
+        </div>
       </section>
     </Layout>
   );
