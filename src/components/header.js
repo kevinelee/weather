@@ -15,7 +15,7 @@ function Header() {
   `);
 
   return (
-    <header className="bg-gray-300">
+    <header className="bg-opacity-0">
       <div className="flex flex-wrap items-center justify-between max-w-7xl p-4 mx-auto">
         <Link to="/">
           <h1 className="flex items-center text-white no-underline">
@@ -41,8 +41,9 @@ function Header() {
         </button>
 
         <nav
-          className={`${isExpanded ? `block` : `hidden`
-            } md:block md:items-center w-full md:w-auto`}
+          className={`${
+            isExpanded ? `block` : `hidden`
+          } md:block md:items-center w-full md:w-auto`}
         >
           {[
             {
