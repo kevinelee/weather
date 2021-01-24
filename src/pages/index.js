@@ -23,18 +23,40 @@ function TemperatureListItem({ name, kelvin }) {
   }
 
   return kelvin ? (
-    <li>
+    <li className="p-1">
       <span className="font-bold text-blue-300">{name}:</span>
       {` ${toCelsius(kelvin)} / ${toFahrenheit(kelvin)}`}
     </li>
   ) : (
-    <li>
+    <li className="p-1">
       <span className="font-bold text-blue-300">{name}:</span>
     </li>
   );
 }
 
 function IndexPage() {
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  function success(pos) {
+    var crd = pos.coords;
+
+    console.log("Your current position is:");
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+    console.log(`More or less ${crd.accuracy} meters.`);
+  }
+
+  function error2(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  const geo = navigator.geolocation.getCurrentPosition(success, error2, options);
+  console.log(geo);
+
   const [items, setItems] = useState({
     clouds: "",
     name: "",
@@ -82,7 +104,9 @@ function IndexPage() {
           <form onSubmit={handleSubmit}>
             <input
               className={
-                error ? "border-2 border-red-500 outline-none" : "outline-none"
+                error
+                  ? "border-2 border-red-500 outline-none"
+                  : "outline-none m-1"
               }
               type="text"
               placeholder="Search for City"
@@ -115,7 +139,5 @@ function IndexPage() {
     </Layout>
   );
 }
-
-// latitude={} longitude={}
 
 export default IndexPage;
