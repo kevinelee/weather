@@ -80,7 +80,7 @@ function IndexPage() {
         title="Home"
       />
 
-      <section className="text-center">
+      <section className="text-center py-16">
         <Background />
         <div className="">
           <form onSubmit={handleSubmit}>
