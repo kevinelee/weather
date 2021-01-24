@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import ReactMap from "../components/ReactMap";
+import Background from "../components/Background";
 
-function ListItem({ name, variable, addClass }) {
+function ListItem({ name, variable, symbol, addClass }) {
   return (
     <li className={`p-1 ${addClass}`}>
-      <span className="font-bold text-blue-300 ">{name}:</span> {variable}
+      <span className="font-bold text-blue-300 ">{name}:</span> {variable}{symbol}
     </li>
   );
 }
@@ -80,6 +81,7 @@ function IndexPage() {
       />
 
       <section className="text-center">
+        <Background />
         <div className="">
           <form onSubmit={handleSubmit}>
             <input
@@ -103,7 +105,11 @@ function IndexPage() {
               <TemperatureListItem name="Temp Max" kelvin={temp_max} />
               <TemperatureListItem name="Temp Min" kelvin={temp_min} />
               <ListItem name="Humidity" variable={humidity} />
-              <ListItem name="Clouds" variable={clouds && clouds.all} />
+              <ListItem
+                name="Clouds"
+                variable={clouds && clouds.all}
+                symbol={""}
+              />
               <ListItem
                 name="Weather"
                 variable={weather && weather[0].description}
