@@ -13,21 +13,17 @@ function ListItem({ name, variable }) {
   );
 }
 
-function TemperatureListItem({name, kelvin}){
-
-  function toCelsius(kelvin){
+function TemperatureListItem({ name, kelvin }) {
+  function toCelsius(kelvin) {
     return `${(kelvin - 273.15).toFixed(2)}°C`;
   }
 
-  function toFahrenheit(kelvin){
+  function toFahrenheit(kelvin) {
     return `${((kelvin - 273.15) * 1.8 + 32).toFixed(2)}°F`;
   }
 
   return (
-    <li>
-      <span className="font-bold text-blue-300 ">{name}:</span>{" "}
-      {`${toCelsius(kelvin)} / ${toFahrenheit(kelvin)}`}
-    </li>
+    { kelvin ? (<li><span className="font-bold text-blue-300">{name}:</span>{`${toCelsius(kelvin)} / ${toFahrenheit(kelvin)}`}</li>) : null}
   );
 }
 
@@ -95,7 +91,11 @@ function IndexPage() {
           <p className="font-bold p-4">Scientifically speaking</p>
 
           <ListItem name="Name" variable={name} />
-          <TemperatureListItem name="Temperature" />
+          {temp ? (
+            <TemperatureListItem name="Temperature" kelvin={temp} />
+          ) : (
+            <ListItem name="Temperature" variable={temp}/>
+          )}
           <ListItem name="Maximum" variable={temp_max} />
           <ListItem name="Minimum" variable={temp_min} />
           <ListItem name="Humidity" variable={humidity} />
