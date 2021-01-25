@@ -61,7 +61,7 @@ function IndexPage() {
   };
 
   const { clouds, name, main, coord, weather } = items || {};
-  const { humidity, temp, temp_max, temp_min } = main || {};
+  const { humidity, temp } = main || {};
 
   const composedCity = decodeURI(city);
   //clouds, clear, mist, snow, rain, drizzle, thunderstorm
@@ -77,8 +77,8 @@ function IndexPage() {
         {isLoadingLocation ? (
           <div>...Loading Current Location</div>
         ) : (
-          <div className="flex flex-col lg:flex-row">
-            <form onSubmit={handleSubmit}>
+          <div className="flex flex-col lg:flex-row p-4 lg:py-12">
+            <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
               <input
                 className={
                   error
@@ -95,14 +95,7 @@ function IndexPage() {
               {isLoadingWeather ? (
                 <div>...Loading</div>
               ) : (
-                <ul
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "column",
-                    padding: "2rem",
-                  }}
+                <ul className="flex justify-center items-center flex-col p-8"
                 >
                   <img
                     style={{ background: "lightblue" }}
@@ -113,13 +106,13 @@ function IndexPage() {
                   />
                   <ListItem name="Name" variable={name} />
                   <TemperatureListItem name="Temperature" kelvin={temp} />
-                  <TemperatureListItem name="Temp Max" kelvin={temp_max} />
-                  <TemperatureListItem name="Temp Min" kelvin={temp_min} />
-                  <ListItem name="Humidity" variable={humidity} />
+                  {/* <TemperatureListItem name="Temp Max" kelvin={temp_max} />
+                  <TemperatureListItem name="Temp Min" kelvin={temp_min} /> */}
+                  <ListItem name="Humidity" variable={humidity} symbol={"%"}/>
                   <ListItem
                     name="Clouds"
                     variable={clouds && clouds.all}
-                    symbol={""}
+                    symbol={"%"}
                   />
                   <ListItem
                     name="Weather"
@@ -129,7 +122,7 @@ function IndexPage() {
                 </ul>
               )}
             </form>
-            <div className="border-2 border-red-500">
+            <div>
               {coord ? <ReactMap lat={coord.lat} lon={coord.lon} /> : null}
             </div>
           </div>

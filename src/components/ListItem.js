@@ -4,7 +4,7 @@ import React from "react";
 function ListItem({ name, variable, symbol, addClass }) {
   return (
     <li className={`p-1 ${addClass}`}>
-      <span className="font-bold text-blue-300 ">{name}:</span> {variable}
+      <span className="font-bold text-gray-600 ">{name}:</span> {variable}
       {symbol}
     </li>
   );
@@ -21,12 +21,12 @@ function TemperatureListItem({ name, kelvin }) {
 
   return kelvin ? (
     <li className="p-1">
-      <span className="font-bold text-blue-300">{name}:</span>
+      <span className="font-bold text-gray-600">{name}:</span>
       {` ${toCelsius(kelvin)} / ${toFahrenheit(kelvin)}`}
     </li>
   ) : (
     <li className="p-1">
-      <span className="font-bold text-blue-300">{name}:</span>
+      <span className="font-bold text-gray-600">{name}:</span>
     </li>
   );
 }

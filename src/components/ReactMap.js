@@ -5,7 +5,7 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 export default function MapContainer({ lat, lon }) {
   const mapStyles = {
     width: "50vw",
-    height: "100vh"
+    height: "80vh"
   };
 
   const defaultCenter = {
