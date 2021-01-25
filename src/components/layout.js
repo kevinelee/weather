@@ -8,9 +8,7 @@ function Layout({ children }) {
     <div className="flex flex-col min-h-screen font-sans text-gray-900">
       <Header />
 
-      <main className="flex-1 w-full mx-auto  ">
-        {children}
-      </main>
+      <main>{children}</main>
 
       <footer className="bg-black bottom-0">
         <nav className="flex justify-between max-w-7xl p-4 mx-auto text-sm md:p-8">
