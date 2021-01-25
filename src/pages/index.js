@@ -122,7 +122,7 @@ function IndexPage() {
                 </ul>
               )}
             </form>
-            <div>
+            <div className="react-map " >
               {coord ? <ReactMap lat={coord.lat} lon={coord.lon} /> : null}
             </div>
           </div>

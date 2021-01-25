@@ -18,7 +18,7 @@ function Header() {
     <header className="bg-opacity-0">
       <div className="flex flex-wrap items-center justify-between max-w-7xl p-4 mx-auto">
         <Link to="/">
-          <h1 className="flex items-center text-black no-underline">
+          <h1 className="flex items-center text-white no-underline">
             <img src={Cloud} className="h-8 w-8 mt-1 mr-1" />
             <span className="text-xl font-bold tracking-tight">
               {site.siteMetadata.title}
