@@ -1,7 +1,14 @@
+import React from "react";
 const resolveConfig = require("tailwindcss/resolveConfig");
 const tailwindConfig = require("./tailwind.config.js");
 
 const fullConfig = resolveConfig(tailwindConfig);
+
+import { Provider } from "./src/reactQuery-helper";
+
+export const wrapRootElement = ({ element }) => {
+  return <Provider>{element}</Provider>;
+};
 
 module.exports = {
   siteMetadata: {
