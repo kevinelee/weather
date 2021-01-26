@@ -1,6 +1,6 @@
 import "./src/styles/global.css";
 import React from "react";
-import { Provider } from "./src/react-query";
+import Provider from "./src/react-query";
 
 export const wrapRootElement = ({ element }) => {
   return <Provider>{element}</Provider>;

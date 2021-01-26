@@ -9,4 +9,4 @@ const Provider = ({ children }) => {
   );
 };
 
-export { Provider };
+export default Provider;
