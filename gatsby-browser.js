@@ -10,3 +10,9 @@ export const wrapRootElement = ({element}) => {
         </QueryClientProvider>
     );
 }
+
+// import { Provider } from "./src/firebase-helper";
+
+// export const wrapRootElement = ({ element }) => {
+//   return <Provider>{element}</Provider>;
+// };
