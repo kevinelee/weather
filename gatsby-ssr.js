@@ -1,6 +1,6 @@
 import React from "react";
 
-const { Provider } = require("react-redux");
+import Provider from "./src/react-query";
 
 const createStore = require("./src/state/createStore");
 const store = createStore();
