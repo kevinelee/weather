@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery, Link } from "gatsby";
 import React, { useState } from "react";
-import Cloud from "../images/cloud.png"
+// import Cloud from "../images/cloud.png"
+import CloudSVG from "../components/SVG/Cloud"
 
 function Header() {
   const [isExpanded, toggleExpansion] = useState(false);
@@ -19,7 +20,8 @@ function Header() {
       <div className="flex flex-wrap items-center justify-between max-w-7xl p-4 mx-auto">
         <Link to="/">
           <h1 className="flex items-center text-white no-underline">
-            <img src={Cloud} className="h-8 w-8 mt-1 mr-1" />
+            {/* <img src={CloudSVG} className="h-8 w-8 mt-1 mr-1" /> */}
+            <CloudSVG stroke="black"/>
             <span className="text-xl font-bold tracking-tight">
               {site.siteMetadata.title}
             </span>

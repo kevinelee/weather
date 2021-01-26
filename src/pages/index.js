@@ -7,6 +7,7 @@ import SEO from "../components/seo";
 import ReactMap from "../components/ReactMap";
 import fetchData from "../utils/fetchData";
 import { ListItem, TemperatureListItem } from "../components/ListItem";
+import loader from "../images/loader.png";
 
 function IndexPage() {
   const [initialCity, setInitialCity] = useState(true);
@@ -75,58 +76,57 @@ function IndexPage() {
 
       <section className="text-center mx-auto max-w-7xl flex justify-center">
         {isLoadingLocation ? (
-          <div>...Loading Current Location</div>
+          <div className="flex justify-center items-center h-screen"><img className="spinner h-12 w-12" src={loader} /></div>
         ) : (
-          <div className="flex flex-col lg:flex-row p-4 lg:py-12">
-            <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
-              <input
-                className={
-                  error
-                    ? "border-2 border-red-500 outline-none"
-                    : "outline-none m-1"
-                }
-                type="text"
-                placeholder="Search for City"
-                value={composedCity}
-                name="cityname"
-                onChange={handleChange}
+            <div className="flex flex-col lg:flex-row p-4 lg:py-12">
+              <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
+                <input
+                  className={
+                    error
+                      ? "border-2 border-red-500 outline-none"
+                      : "outline-none m-1"
+                  }
+                  type="text"
+                  placeholder="Search for City"
+                  value={composedCity}
+                  name="cityname"
+                  onChange={handleChange}
                 // onClick={() => setError(false)}
-              />
-              {isLoadingWeather ? (
-                <div>...Loading</div>
-              ) : (
-                <ul className="flex justify-center items-center flex-col p-8"
-                >
-                  <img
-                    style={{ background: "lightblue" }}
-                    src={`http://openweathermap.org/img/wn/${
-                      weather && weather[0].icon
-                    }@2x.png`}
-                    title={weather && weather[0].description}
-                  />
-                  <ListItem name="Name" variable={name} />
-                  <TemperatureListItem name="Temperature" kelvin={temp} />
-                  {/* <TemperatureListItem name="Temp Max" kelvin={temp_max} />
+                />
+                {isLoadingWeather ? (
+                  <div className="flex justify-center items-center h-screen"><img className="spinner h-12 w-12" src={loader} /></div>
+                ) : (
+                    <ul className="flex justify-center items-center flex-col p-8"
+                    >
+                      <img
+                        style={{ background: "lightblue" }}
+                        src={`http://openweathermap.org/img/wn/${weather && weather[0].icon
+                          }@2x.png`}
+                        title={weather && weather[0].description}
+                      />
+                      <ListItem name="Name" variable={name} />
+                      <TemperatureListItem name="Temperature" kelvin={temp} />
+                      {/* <TemperatureListItem name="Temp Max" kelvin={temp_max} />
                   <TemperatureListItem name="Temp Min" kelvin={temp_min} /> */}
-                  <ListItem name="Humidity" variable={humidity} symbol={"%"}/>
-                  <ListItem
-                    name="Clouds"
-                    variable={clouds && clouds.all}
-                    symbol={"%"}
-                  />
-                  <ListItem
-                    name="Weather"
-                    variable={weather && weather[0].description}
-                    addClass={"capitalize"}
-                  />
-                </ul>
-              )}
-            </form>
-            <div className="react-map " >
-              {coord ? <ReactMap lat={coord.lat} lon={coord.lon} /> : null}
+                      <ListItem name="Humidity" variable={humidity} symbol={"%"} />
+                      <ListItem
+                        name="Clouds"
+                        variable={clouds && clouds.all}
+                        symbol={"%"}
+                      />
+                      <ListItem
+                        name="Weather"
+                        variable={weather && weather[0].description}
+                        addClass={"capitalize"}
+                      />
+                    </ul>
+                  )}
+              </form>
+              <div className="react-map " >
+                {coord ? <ReactMap lat={coord.lat} lon={coord.lon} /> : null}
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </section>
     </Layout>
   );
