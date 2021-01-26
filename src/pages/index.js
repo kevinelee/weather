@@ -91,12 +91,12 @@ function IndexPage() {
                   value={composedCity}
                   name="cityname"
                   onChange={handleChange}
-                // onClick={() => setError(false)}
                 />
+                <button className="inline-flex items-center px-4 py-1.5 border border-black text-xs font-medium rounded-full shadow-sm text-black bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black mt-2" type="submit">Search</button>
                 {isLoadingWeather ? (
                   <div className="flex justify-center items-center h-screen"><img className="spinner h-12 w-12" src={loader} /></div>
                 ) : (
-                    <ul className="flex justify-center items-center flex-col p-8"
+                    <ul className="flex justify-center items-center flex-col p-8 pt-2"
                     >
                       <img
                         style={{ background: "lightblue" }}

@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import { graphql, useStaticQuery, Link } from "gatsby";
 import React, { useState } from "react";
 // import Cloud from "../images/cloud.png"
@@ -21,7 +22,7 @@ function Header() {
         <Link to="/">
           <h1 className="flex items-center text-white no-underline">
             {/* <img src={CloudSVG} className="h-8 w-8 mt-1 mr-1" /> */}
-            <CloudSVG stroke="black"/>
+            <CloudSVG />
             <span className="text-xl font-bold tracking-tight">
               {site.siteMetadata.title}
             </span>
@@ -43,9 +44,8 @@ function Header() {
         </button>
 
         <nav
-          className={`${
-            isExpanded ? `block` : `hidden`
-          } md:block md:items-center w-full md:w-auto`}
+          className={`${isExpanded ? `block` : `hidden`
+            } md:block md:items-center w-full md:w-auto`}
         >
           {[
             {

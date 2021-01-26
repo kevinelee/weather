@@ -1,13 +1,14 @@
+/* eslint react/prop-types: 0 */
 import PropTypes from "prop-types";
 import React from "react";
 
 import Header from "./header";
 
 function Layout({ children }) {
-  return (
-    <div className="flex flex-col min-h-screen font-sans text-gray-900" style={{backgroundColor: "lightblue"}}>
-      <Header />
 
+  return (
+    <div className="flex flex-col min-h-screen font-sans text-gray-900" style={{ backgroundColor: "lightblue" }}>
+      <Header/>
       <main>{children}</main>
 
       <footer className="bg-black bottom-0">
