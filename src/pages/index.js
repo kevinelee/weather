@@ -99,7 +99,7 @@ function IndexPage() {
                     <ul className="flex justify-center items-center flex-col p-8 pt-2"
                     >
                       <img
-                        style={{ background: "lightblue" }}
+                        
                         src={`http://openweathermap.org/img/wn/${weather && weather[0].icon
                           }@2x.png`}
                         title={weather && weather[0].description}

@@ -10,6 +10,10 @@
 }
 
 .blue-skies {
+  background: rgb(170,218,255)
+}
+
+.z-blue-skies {
   background: #56CCF2;
   /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
