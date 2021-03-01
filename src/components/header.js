@@ -56,6 +56,10 @@ function Header() {
               route: `/contact`,
               title: `Contact`,
             },
+            {
+              route: `/indeed`,
+              title: `Indeed`,
+            },
           ].map((link) => (
             <Link
               className="block mt-4 text-white no-underline md:inline-block md:mt-0 md:ml-6"
