@@ -1,4 +1,11 @@
+/* eslint react/prop-types: 0 */
 import React from "react";
+
+const CalendarInput = ({ id, onChange }) => {
+  return (
+    <input className="m-2" onChange={onChange} type="date" id={id} name={id} />
+  );
+};
 
 function App() {
   const [firstDate, setFirstDate] = React.useState(null);
@@ -14,29 +21,45 @@ function App() {
     setThirdDate(third?.value);
   }
 
+  function handleChange(event) {
+    // const { first, second, third } = event.target.id;
+    console.log(event.target.value);
+
+    console.log(event.target.id);
+
+    switch (event.target.id) {
+      case "first":
+        setFirstDate(event.target.value);
+        break;
+      case "second":
+        setSecondDate(event.target.value);
+        break;
+      case "third":
+        setThirdDate(event.target.value);
+        break;
+      case "fourth":
+        break;
+    }
+
+    // setFirstDate(first?.value);
+    // setSecondDate(second?.value);
+    // setThirdDate(third?.value);
+  }
+
   return (
     <div className="App flex justify-center items-center h-screen">
       <header className=" ">
+        <div className="text-5xl font-bold p-4">Time Availability</div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="birthday">date: </label>
-          <input type="date" id="first" name="first" />
-          <input type="date" id="second" name="second" />
-          <input type="date" id="third" name="third" />
-          <input className="py-2 px-4 " type="submit" />
+          <CalendarInput onChange={handleChange} id="first" />
+          <CalendarInput onChange={handleChange} id="second" />
+          <CalendarInput onChange={handleChange} id="third" />
         </form>
 
-        <div
-          id="final"
-          style={{
-            height: "100px",
-            width: "100%",
-            color: "red",
-            padding: "20px",
-            fontSize: "40px"
-          
-          }}
-        >
-          {firstDate} 12PM-8PM, {secondDate} 12PM-8PM, {thirdDate} 12PM-8PM
+        <div id="final" className="h-42 w-screen text-red-500 p-4 text-xl">
+          <span className="text-red-400">{firstDate ? `${firstDate} 12PM-8PM` : null}</span>
+          <span className="text-blue-400">{secondDate ? `, ${secondDate} 12PM-8PM` : null}</span>
+          <span className="text-green-500">{thirdDate ? `, ${thirdDate} 12PM-8PM` : null}</span>
         </div>
         <button
           className="border border-black py-2 px-4 rounded-lg"
