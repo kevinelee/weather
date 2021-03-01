@@ -24,6 +24,9 @@ function IndexPage() {
       fetchData({ endpoint: "https://extreme-ip-lookup.com/json/" }),
   });
 
+  console.log('kevins items', items);
+  
+
   const {
     isLoading: isLoadingWeather,
     data: weatherData,
@@ -61,8 +64,8 @@ function IndexPage() {
     setCity(e.target.value);
   };
 
-  const { clouds, name, main, coord, weather } = items || {};
-  const { humidity, temp } = main || {};
+  const { clouds, name, main, coord, weather, base } = items || {};
+  const { humidity, temp, feels_like } = main || {};
 
   const composedCity = decodeURI(city);
   //clouds, clear, mist, snow, rain, drizzle, thunderstorm
@@ -105,6 +108,8 @@ function IndexPage() {
                         title={weather && weather[0].description}
                       />
                       <ListItem name="Name" variable={name} />
+                      <ListItem name="Base" variable={base} />
+                      <ListItem name="feels_like" variable={feels_like} />
                       <TemperatureListItem name="Temperature" kelvin={temp} />
                       {/* <TemperatureListItem name="Temp Max" kelvin={temp_max} />
                   <TemperatureListItem name="Temp Min" kelvin={temp_min} /> */}
