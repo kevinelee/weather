@@ -1,7 +1,12 @@
 /* eslint react/prop-types: 0 */
 import React from "react";
 
-const CalendarInput = ({ id, onChange, removeDate }) => {
+const CalendarInput = ({
+  id,
+  onChange,
+  removeDate,
+  hidden = "text-transparent",
+}) => {
   return (
     <div>
       <input
@@ -14,7 +19,7 @@ const CalendarInput = ({ id, onChange, removeDate }) => {
       <button
         id={id}
         onClick={removeDate}
-        className="text-2xl font-bold mr-1 p-2 cursor-pointer focus:text-red-500 focus:outline-none"
+        className={`${hidden} text-2xl font-bold cursor-auto mr-1 p-2 focus:outline-none`}
       >
         &#215;
       </button>
@@ -78,16 +83,25 @@ function App() {
             onChange={handleChange}
             removeDate={removeDate}
             id="first"
+            hidden={`${
+              firstDate ? "text-black cursor-pointer" : "text-transparent"
+            }`}
           />
           <CalendarInput
             onChange={handleChange}
             removeDate={removeDate}
             id="second"
+            hidden={`${
+              secondDate ? "text-black cursor-pointer" : "text-transparent"
+            }`}
           />
           <CalendarInput
             onChange={handleChange}
             removeDate={removeDate}
             id="third"
+            hidden={`${
+              thirdDate ? "text-black cursor-pointer" : "text-transparent"
+            }`}
           />
         </form>
 
@@ -101,7 +115,9 @@ function App() {
               : null}
           </span>
           <span className="text-green-500">
-            {thirdDate ? `${firstDate || secondDate ? "," : ""} ${thirdDate} 12PM-8PM` : null}
+            {thirdDate
+              ? `${firstDate || secondDate ? "," : ""} ${thirdDate} 12PM-8PM`
+              : null}
           </span>
         </div>
         <button
