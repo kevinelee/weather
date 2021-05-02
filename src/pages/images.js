@@ -23,6 +23,7 @@ import image14 from "../images/kimchi-family/image14.jpeg";
 import image15 from "../images/kimchi-family/image15.jpeg";
 import image16 from "../images/kimchi-family/image16.jpeg";
 import image17 from "../images/kimchi-family/image17.jpeg";
+import familyLogo from "../images/kimchi-family/family-kimchi.png"
 
 function ImagesPage() {
   return (
