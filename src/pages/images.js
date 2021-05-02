@@ -4,6 +4,7 @@ import Layout from "../components/layout";
 import altaree from "../images/altaree.jpg";
 import depah from "../images/depah.jpg";
 import napa from "../images/napa.jpg";
+import jokpah from "../images/jokpah.jpg"
 import image0 from "../images/kimchi-family/image0.jpeg";
 import image1 from "../images/kimchi-family/image1.jpeg";
 import image2 from "../images/kimchi-family/image2.jpeg";
