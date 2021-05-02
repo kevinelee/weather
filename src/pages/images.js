@@ -4,7 +4,7 @@ import Layout from "../components/layout";
 import altaree from "../images/altaree.jpg";
 import depah from "../images/depah.jpg";
 import napa from "../images/napa.jpg";
-import jokpah from "../images/jokpah.jpg"
+import jokpah from "../images/jokpah.jpg";
 import image0 from "../images/kimchi-family/image0.jpeg";
 import image1 from "../images/kimchi-family/image1.jpeg";
 import image2 from "../images/kimchi-family/image2.jpeg";
@@ -23,12 +23,13 @@ import image14 from "../images/kimchi-family/image14.jpeg";
 import image15 from "../images/kimchi-family/image15.jpeg";
 import image16 from "../images/kimchi-family/image16.jpeg";
 import image17 from "../images/kimchi-family/image17.jpeg";
-import familyLogo from "../images/kimchi-family/family-kimchi.png"
+import familyLogo from "../images/kimchi-family/family-kimchi.png";
 
 function ImagesPage() {
   return (
     <Layout>
       <section>
+        <img src={familyLogo} />
         <img src={altaree} />
         <img src={depah} />
         <img src={napa} />
